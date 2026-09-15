@@ -1,13 +1,13 @@
 from flask import Flask, jsonify
 app = Flask(__name__)
 ORDERS = [
-    {"id": "1", "status": "pending"},
-    {"id": "2", "status": "shipped"},
-    {"id": "3", "status": "delivered"},
+    {"order_id": "1", "status": "pending"},
+    {"order_id": "2", "status": "shipped"},
+    {"order_id": "3", "status": "delivered"},
 ] # giả lập DB
 def get(order_id):
     for order in ORDERS:
-        if order["id"] == order_id:
+        if order["order_id"] == order_id:
             return order
     return None
 
