@@ -1,0 +1,143 @@
+openapi: 3.0.3
+info:
+  title: Social Network API - Auth & Posts
+  version: 1.0.0
+  description: API cho mạng xã hội đơn giản, minh họa quá trình Authentication (JWT) và Authorization (Scopes & Ownership).
+servers:
+  - url: http://localhost:5000/api/v1
+    description: Local server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Nhập JWT Access Token vào đây.
+  
+  schemas:
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+          
+    AuthResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+          
+    Post:
+      type: object
+      properties:
+        id:
+          type: integer
+        author_id:
+          type: integer
+        content:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+
+paths:
+  /auth/login:
+    post:
+      summary: Đăng nhập cấp Access Token và Refresh Token
+      description: Endpoint này không cần scope. Dùng email/password để nhận cặp token.
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Đăng nhập thành công, trả về token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          description: Sai email hoặc mật khẩu (invalid_credentials).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Quá nhiều request (Rate-limit chống credential stuffing).
+
+  /auth/refresh:
+    post:
+      summary: Làm mới Access Token
+      description: Endpoint này yêu cầu cung cấp Refresh Token ở header Authorization.
+      tags:
+        - Authentication
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Cấp Access Token mới thành công.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+        '401':
+          description: Refresh token không hợp lệ, hết hạn, hoặc đã bị thu hồi (revoked).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /posts/{id}:
+    get:
+      summary: Lấy thông tin một bài viết
+      description: Yêu cầu Access Token.
+      tags:
+        - Posts
+      security:
+        - bearerAuth:
+            - posts:read  # Yêu cầu scope đọc bài viết
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID của bài viết cần lấy.
+      responses:
+        '200':
+          description: Trả về chi tiết bài viết.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '401':
+          description: Thiếu Access Token hoặc Token hết hạn/bị thu hồi.
+        '403':
+          description: Bị cấm (Forbidden). Xảy ra khi Token thiếu scope `posts:read`, hoặc gặp lỗi BOLA (user không có quyền đọc bài viết bị ẩn của người khác).
+        '404':
+          description: Không tìm thấy bài viết (Not Found).
