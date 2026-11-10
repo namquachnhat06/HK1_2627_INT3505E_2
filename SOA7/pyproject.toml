@@ -1,0 +1,14 @@
+[project]
+name = "product_api"
+version = "0.1.0"
+dependencies = [
+    "Flask==3.0.0",
+    "Flask-SQLAlchemy",
+    "Flask-Migrate",
+    "SQLAlchemy",
+    "marshmallow==3.20.1",
+    "gunicorn==21.2.0"
+]
+
+[project.optional-dependencies]
+dev = ["pytest==7.4.3"]

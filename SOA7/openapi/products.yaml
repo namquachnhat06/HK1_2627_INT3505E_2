@@ -1,0 +1,11 @@
+openapi: 3.0.3
+info:
+  title: Product API
+  version: 1.0.0
+paths:
+  /api/v1/products:
+    get:
+      summary: Lấy danh sách sản phẩm
+      responses:
+        '200':
+          description: OK
