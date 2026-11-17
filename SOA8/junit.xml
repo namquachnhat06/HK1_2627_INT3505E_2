@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Books API — Lab08 Starter" tests="7" time="0.081">
+  <testsuite name="books / GET /books — initial list" id="625b3d25-cc4e-4cca-869f-17ff373fa767" timestamp="2026-11-17T09:51:27.790Z" tests="2" failures="0" errors="0" time="0.031">
+    <testcase name="200 OK" time="0.031" classname="BooksGetBooksInitialList"/>
+    <testcase name="body is array" time="0.031" classname="BooksGetBooksInitialList"/>
+  </testsuite>
+  <testsuite name="books / POST /books — create" id="48c17c95-11eb-4fa6-a6b1-1eb4b9343814" timestamp="2026-11-17T09:51:27.790Z" tests="2" failures="0" errors="0" time="0.011">
+    <testcase name="201 Created" time="0.011" classname="BooksPostBooksCreate"/>
+    <testcase name="positive id" time="0.011" classname="BooksPostBooksCreate"/>
+  </testsuite>
+  <testsuite name="books / GET /books/{id} — read" id="32162671-be63-42e3-9df5-6f4a96e0ffc8" timestamp="2026-11-17T09:51:27.790Z" tests="2" failures="0" errors="0" time="0.004">
+    <testcase name="200 OK" time="0.004" classname="BooksGetBooksIdRead"/>
+    <testcase name="expected fields" time="0.004" classname="BooksGetBooksIdRead"/>
+  </testsuite>
+  <testsuite name="books / PUT /books/{id} — replace" id="2d3152f9-3091-4369-a18f-b3e4f4af5c52" timestamp="2026-11-17T09:51:27.790Z" tests="2" failures="0" errors="0" time="0.018">
+    <testcase name="200 OK" time="0.018" classname="BooksPutBooksIdReplace"/>
+    <testcase name="updated title" time="0.018" classname="BooksPutBooksIdReplace"/>
+  </testsuite>
+  <testsuite name="books / DELETE /books/{id} — delete" id="20ad96af-1f4e-412d-879f-bd45b0eebc08" timestamp="2026-11-17T09:51:27.790Z" tests="2" failures="0" errors="0" time="0.010">
+    <testcase name="204 No Content" time="0.010" classname="BooksDeleteBooksIdDelete"/>
+    <testcase name="empty body" time="0.010" classname="BooksDeleteBooksIdDelete"/>
+  </testsuite>
+  <testsuite name="error-cases / POST /books (missing title)" id="7fb6698a-cc05-4d69-8a7f-c73aedb262ef" timestamp="2026-11-17T09:51:27.790Z" tests="2" failures="0" errors="0" time="0.003">
+    <testcase name="Status code tra ve phai la 400 Bad Request" time="0.003" classname="ErrorCasesPostBooksMissingTitle"/>
+    <testcase name="Body co thong bao loi" time="0.003" classname="ErrorCasesPostBooksMissingTitle"/>
+  </testsuite>
+  <testsuite name="error-cases / GET /books/9999" id="26bc27c2-aa70-4a19-a1d3-38540a22c4a3" timestamp="2026-11-17T09:51:27.790Z" tests="2" failures="0" errors="0" time="0.004">
+    <testcase name="Status code tra ve phai la 404 Not Found" time="0.004" classname="ErrorCasesGetBooks9999"/>
+    <testcase name="Body co thong bao khong tim thay" time="0.004" classname="ErrorCasesGetBooks9999"/>
+  </testsuite>
+</testsuites>
