@@ -125,3 +125,10 @@ lab08-starter/
 
 - OpenAPI cố ý chứa lỗi nên các công cụ contract check phải fail **trước khi sửa**.
 - `pytest` và Newman đều chạy được độc lập sau khi đã cài dependency, không cần Postman GUI.
+
+## Lab 2: Kiểm thử hợp đồng API với Spectral
+
+**1. Output Log:**
+```bash
+(.venv) PS C:\Quách Nhật Nam\Kiến trúc hướng dịch vụ\FlaskPractise\SOA8> spectral lint openapi.yaml --ruleset .spectral.yml
+No results with a severity of 'error' found!
