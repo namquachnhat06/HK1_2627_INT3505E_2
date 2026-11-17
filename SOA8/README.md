@@ -132,3 +132,12 @@ lab08-starter/
 ```bash
 (.venv) PS C:\Quách Nhật Nam\Kiến trúc hướng dịch vụ\FlaskPractise\SOA8> spectral lint openapi.yaml --ruleset .spectral.yml
 No results with a severity of 'error' found!
+
+
+## Hướng dẫn chạy Automation Test (Lab 3)
+
+### 1. Cài đặt các thư viện cần thiết
+Đảm bảo bạn đang ở thư mục gốc của dự án và kích hoạt môi trường ảo, sau đó chạy lệnh cài đặt dependencies và Newman:
+```bash
+pip install -r requirements.txt
+npm install -g newman
