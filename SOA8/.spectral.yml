@@ -1,0 +1,13 @@
+extends: "spectral:oas"
+rules:
+  info-contact: false
+  operation-description: false
+  operation-tags: false
+
+  response-200-has-properties:
+    description: "Response 200 (nếu là object) phải định nghĩa ít nhất 1 trường dữ liệu."
+    severity: error
+    given: "$.paths.*.*.responses.200.content.*.schema[?(@.type === 'object')]"
+    then:
+      field: "properties"
+      function: truthy
