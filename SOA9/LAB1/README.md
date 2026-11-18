@@ -22,7 +22,7 @@ SOA9/
 
 ---
 
-## ⚙️ Hướng dẫn cài đặt môi trường ảo (venv)
+##  Hướng dẫn cài đặt môi trường ảo (venv)
 
 ### Bước 1: Mở Terminal
 Mở terminal tại thư mục gốc của dự án (`SOA9`). Bạn có thể nhấn phím tắt `` Ctrl + ` `` trong VS Code.

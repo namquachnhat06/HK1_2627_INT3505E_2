@@ -20,10 +20,40 @@ def index():
         "endpoints": {
             "v1_get_user": "GET /api/v1/users/<id> (Trả về full_name, có kèm Sunset header)",
             "v2_get_user": "GET /api/v2/users/<id> (Trả về first_name, last_name - Breaking change)",
-            "v2_create_user": "POST /api/v2/users (Mở rộng: Tạo user mới)",
-            "openapi_spec": "Xem file openapi.yaml tại thư mục gốc"
+            "v2_create_user": "POST /api/v2/users (Mở rộng 1: Tạo user mới)",
+            "docs": "Xem giao diện Swagger UI tại http://localhost:5000/docs (Mở rộng 2)"
         }
     }
+
+# Mở rộng 2: Tích hợp Swagger UI trực tiếp qua CDN
+@app.route("/docs")
+def swagger_ui():
+    return """<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <title>Swagger UI - SOA 09 Practice 1</title>
+  <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui.css" />
+</head>
+<body>
+  <div id="swagger-ui"></div>
+  <script src="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-bundle.js"></script>
+  <script>
+    window.onload = () => {
+      window.ui = SwaggerUIBundle({
+        url: '/openapi.yaml',
+        dom_id: '#swagger-ui',
+      });
+    };
+  </script>
+</body>
+</html>"""
+
+@app.route("/openapi.yaml")
+def openapi_file():
+    with open("openapi.yaml", "r", encoding="utf-8") as f:
+        return f.read(), 200, {"Content-Type": "text/yaml; charset=utf-8"}
+
 
 if __name__ == "__main__":
     print("🚀 Server đang khởi động tại http://127.0.0.1:5000 ...")
