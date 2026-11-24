@@ -1,0 +1,15 @@
+# Python virtual environment (dùng chung cho cả SOA9)
+venv/
+.venv/
+env/
+
+# Byte-compiled / cache ở tất cả các thư mục con
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Instance folder
+instance/
+
+# Environment variables
+.env
